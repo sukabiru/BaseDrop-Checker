@@ -1,8 +1,9 @@
+// /api/card.tsx
 import { ImageResponse } from '@vercel/og';
 
 export const config = { runtime: 'edge' };
 
-// helper
+// helpers
 function shortAddr(addr: string) {
   return addr && addr.startsWith('0x') ? `${addr.slice(0, 6)}…${addr.slice(-4)}` : '';
 }
@@ -14,7 +15,7 @@ function themeForTier(tier: string) {
 }
 
 export default async function handler(req: Request) {
-  // ✅ load fonts from /public using the current request origin
+  // ✅ load fonts from public/ based on current request origin
   const interUrl     = new URL('/Inter-Regular.ttf', req.url);
   const interBoldUrl = new URL('/Inter-ExtraBold.ttf', req.url);
   const orbitronUrl  = new URL('/Orbitron-SemiBold.ttf', req.url);
@@ -148,7 +149,7 @@ export default async function handler(req: Request) {
       </div>
     ),
     {
-     width: 1200,
+      width: 1200,
       height: 630,
       fonts: [
         { name: 'Inter', data: inter, weight: 400, style: 'normal' },
